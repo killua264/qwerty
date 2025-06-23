@@ -1,0 +1,125 @@
+Here's a Methods section suitable for a research paper based on your provided framework:
+
+
+---
+
+3. Methods
+
+3.1 Overview
+
+This study evaluates the structural health, relevance, and completeness of a Knowledge Graph (KG) using a formally defined, layered metric system. We adopt a Localized, Personalized Knowledge Management Framework that integrates both global and subgraph-level analyses. The framework quantifies various facets of the KG’s condition using a set of core metrics, culminating in a composite P-Score that captures the uncertainty and strategic value of missing information.
+
+3.2 Core Metric Definitions
+
+We define five base metrics that serve as the foundation of our framework. Each metric is computed both at the global level (entire KG) and the localized level (topical subgraphs), unless otherwise noted.
+
+3.2.1 Query Frequency (QF, SQF)
+
+Purpose: Measures user interest and utilization intensity.
+
+Global Query Frequency (QF):
+
+where  is the total queries for item , and  is the total queries for the item's parent class.
+
+Localized Query Frequency (SQF):
+
+This reflects item interest within a particular topical subgraph.
+
+
+3.2.2 Timeliness (T)
+
+Purpose: Assesses the temporal freshness of each node.
+
+Formula:
+
+where  is the time since last update of node .
+This is used both globally and locally, and can be averaged across subgraphs for macro-level analysis.
+
+
+3.2.3 Class Instantiation Ratio (CIR, SCIR)
+
+Purpose: Indicates class coverage and completeness.
+
+Global CIR:
+
+where  is the number of instances of class , and  is the total number of instances.
+
+Localized SCIR:
+
+
+
+3.2.4 Property Instantiation Ratio (PIR, SPIR)
+
+Purpose: Measures relationship usage frequency.
+
+Global PIR:
+
+where  is the number of triples involving property , and  is the total number of triples in the KG.
+
+Localized SPIR:
+
+
+
+3.2.5 Subgraph Instantiation Ratio (SIR)
+
+Purpose: Evaluates structural completeness within a subgraph.
+
+Formula (Localized Only):
+
+
+
+A high SIR suggests that entities within the subgraph are well-typed and structurally mature.
+
+3.3 Composite Metric: The P-Score
+
+To integrate uncertainty and strategic value into a single diagnostic value, we introduce the P-Score, a personalized metric calculated using the entropy of unknown or missing entities, weighted by their structural and user relevance.
+
+3.3.1 Global P-Score
+
+Formula:
+
+
+P\text{-Score} = \sum_i \left[ c_n(i) \cdot p_i \cdot \log\left(\frac{1}{p_i}\right) \right] + \sum_j \left[ c_e(j) \cdot q_j \cdot \log\left(\frac{1}{q_j}\right) \right]
+
+Relevance Factors:
+
+
+c_n(i) = w_1 \cdot CIR(class(i)) + w_2 \cdot T(i) + w_3 \cdot QF(i)
+
+c_e(j) = w_1 \cdot PIR(property(j)) + w_2 \cdot T(j) + w_3 \cdot QF(j) ]
+
+3.3.2 Localized P-Score
+
+Formula:
+
+
+P\text{-Score}(G) = \sum_i \left[ c_{n\_local}(i) \cdot p_i \cdot \log\left(\frac{1}{p_i}\right) \right] + \sum_j \left[ c_{e\_local}(j) \cdot q_j \cdot \log\left(\frac{1}{q_j}\right) \right]
+
+Localized Relevance Factors:
+
+
+c_{n\_local}(i) = w_1 \cdot SCIR(class(i)) + w_2 \cdot T(i) + w_3 \cdot SQF(i)
+
+c_{e_local}(j) = w_1 \cdot SPIR(property(j)) + w_2 \cdot T(j) + w_3 \cdot SQF(j) ]
+
+The weighting coefficients  are set based on analytical goals (e.g., prioritizing freshness vs. class coverage).
+
+3.4 Evaluation and Interpretation
+
+We apply these metrics to evaluate both the full KG and domain-specific subgraphs. The global metrics serve to identify high-level structural or usage patterns. In contrast, the localized metrics (e.g., SQF, SCIR, SPIR, SIR) support diagnostics of subgraph maturity and targeted maintenance.
+
+By comparing subgraph P-Scores with associated SPIR, SQF, and SIR values, we can classify subgraphs into categories such as:
+
+High Relevance, Low Completeness: Frequently queried but structurally sparse.
+
+Low Relevance, High Completeness: Stable and mature, but low user interest.
+
+Low Timeliness: Stale data nodes/edges indicating potential obsolescence.
+
+
+This enables precise and informed intervention strategies, including targeted enrichment, pruning, or re-prioritization of KG subdomains.
+
+
+---
+
+Let me know if you want the Results or Discussion sections next.
